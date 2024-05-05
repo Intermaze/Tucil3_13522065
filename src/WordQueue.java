@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -9,10 +9,10 @@ public class WordQueue {
 	private ArrayList<Node> graph;
 	private PriorityQueue<Node> buffer;
 	private Set<String> visited;
-	private HashSet<String> words;
+	private List<String> words;
 	private String end;
 
-	public WordQueue(HashSet<String> dict, Comparator<Node> alg, String start, String end){
+	public WordQueue(List<String> dict, Comparator<Node> alg, String start, String end){
 		this.graph = new ArrayList<Node>();
 		this.buffer = new PriorityQueue<Node>(alg);
 		this.visited = new HashSet<String>();
@@ -20,16 +20,12 @@ public class WordQueue {
 		this.end = end;
 		
 		int g,h;
-
-		Iterator<String> wordItr = words.iterator();
 		
-		while (wordItr.hasNext()){
-			String nextWord = wordItr.next();
-			g = diffLetters(start, nextWord);
-			h = diffLetters(nextWord, end);
-			ArrayList<String> next = findNext(nextWord);
+		for (int i=0; i<words.size(); i++){
+			g = diffLetters(start, words.get(i));
+			h = diffLetters(words.get(i), end);
 
-			Node node = new Node(nextWord, g, h, next);
+			Node node = new Node(words.get(i), g, h, null);
 			this.graph.add(node);
 			
 			if (node.word.equals(start)){
@@ -41,6 +37,7 @@ public class WordQueue {
 
 	public void processNext(){
 		Node curr = this.buffer.poll();
+		curr.next = findNext(curr.word);
 		for (String w : curr.next){
 			if (!visited.contains(w)){
 				Node n = getNodeInGraph(w);
@@ -95,11 +92,9 @@ public class WordQueue {
 
 	private ArrayList<String> findNext(String word){
 		ArrayList<String> next = new ArrayList<String>();
-		Iterator<String> wordItr = words.iterator();
-		while(wordItr.hasNext()){
-			String nextWord = wordItr.next();
-			if (diffLetters(nextWord, word) == 1){
-				next.add(nextWord);
+		for(int i=0; i<words.size(); i++){
+			if (diffLetters(words.get(i), word) == 1){
+				next.add(words.get(i));
 			}
 		}
 		return next;
