@@ -29,7 +29,7 @@ public class WordQueue {
 			g = 0;
 			h = diffLetters(nextWord, end);
 
-			Node node = new Node(nextWord, g, h, null);
+			Node node = new Node(nextWord, g, h);
 			this.graph.put(node.word, node);
 			
 			if (node.word.equals(start)){
@@ -41,9 +41,9 @@ public class WordQueue {
 
 	public void processNext(){
 		Node curr = this.buffer.poll();
-		curr.next = findNext(curr.word);
+		ArrayList<String> nextWords = findNext(curr.word);
 		visited.add(curr.word);
-		for (String w : curr.next){
+		for (String w : nextWords){
 			if (!visited.contains(w)){
 				Node n = getNodeInGraph(w);
 				n.g = curr.g + 1;
