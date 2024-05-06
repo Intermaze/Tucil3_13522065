@@ -1,13 +1,15 @@
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main{
-	private static List<String> filterByLength(List<String> s, int length){
-		List<String> filter = new ArrayList<String>();
-		for(int i=0; i<s.size(); i++){
-			if (s.get(i).length() == length) filter.add(s.get(i));
+	private static HashSet<String> filterByLength(HashSet<String> dict, int length){
+		HashSet<String> filter = new HashSet<String>();
+		Iterator<String> wordItr = dict.iterator();
+		while(wordItr.hasNext()){
+			String nextWord = wordItr.next();
+			if (nextWord.length() == length) filter.add(nextWord);
 		}
 		return filter; 
 	}	
@@ -50,7 +52,7 @@ public class Main{
 		}
 		else{
 			long filterStartTime = System.currentTimeMillis();
-			List<String> filteredDict = filterByLength(dict.getDict(), start.length());
+			HashSet<String> filteredDict = filterByLength(dict.getDict(), start.length());
 			long filterEndTime = System.currentTimeMillis();
 			WordQueue wq;
 			

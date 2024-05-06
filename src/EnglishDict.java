@@ -1,15 +1,14 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class EnglishDict {
-	private List<String> dict;
+	private HashSet<String> dict;
 
 	public EnglishDict(String filename){
 		try{
 			Scanner s = new Scanner(new File(filename));
-			this.dict = new ArrayList<String>();
+			this.dict = new HashSet<String>();
 			while (s.hasNext()){
 				this.dict.add(s.next());
 			}
@@ -21,7 +20,7 @@ public class EnglishDict {
 		}
 	}
 
-	public List<String> getDict(){
+	public HashSet<String> getDict(){
 		return this.dict;
 	}
 
