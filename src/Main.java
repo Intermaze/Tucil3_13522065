@@ -15,7 +15,7 @@ public class Main{
 	}	
 
 	public static void main(String[] args) {
-		EnglishDict dict = new EnglishDict("src/words-alpha.txt");
+		EnglishDict dict = new EnglishDict("words-alpha.txt");
 		Scanner in = new Scanner(System.in);
 		String start, end;
 		int algorithm;
