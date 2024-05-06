@@ -80,7 +80,10 @@ public class WordQueue {
 		System.out.println(solution.word);
 		System.out.println("Visited count: " + visited.size());
 		System.out.println("Steps count: " + steps);
-		
+	}
+
+	public void printVisitedOnly(){
+		System.out.println("Visited count: " + visited.size());
 	}
 
 	public boolean bufferIsEmpty(){
@@ -99,16 +102,6 @@ public class WordQueue {
 	}
 
 	private ArrayList<String> findNext(String word){
-		// ArrayList<String> next = new ArrayList<String>();
-		// Iterator<String> wordItr = words.iterator();
-		// while(wordItr.hasNext()){
-		// 	String nextWord = wordItr.next();
-		// 	if (diffLetters(nextWord, word) == 1){
-		// 		next.add(nextWord);
-		// 	}
-		// }
-		// return next;
-
 		ArrayList<String> next = new ArrayList<String>();
 		String temp;
 		for(int i=0; i<word.length(); i++){

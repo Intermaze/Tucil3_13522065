@@ -33,10 +33,11 @@ public class Main{
 		else{
 			System.out.print("End word: ");
 			end = in.nextLine();
-			System.out.println("Algorithm List");
+			System.out.println("====== Algorithm List ======");
 			System.out.println("1: UCS (Uniform Cost Search)");
-			System.out.println("2: G-BFS");
+			System.out.println("2: Greedy Best First Search");
 			System.out.println("3: A* Search");
+			System.out.println("============================");
 			System.out.print("Algorithm to use: ");
 			algorithm = in.nextInt();
 		}
@@ -63,28 +64,24 @@ public class Main{
 				wq = new WordQueue(filteredDict, new GBFS(), start, end);
 			}
 			else{
+				//Kalau input selain 1 dan 2, automatis dipilih algoritma A*
 				wq = new WordQueue(filteredDict, new Astar(), start, end);
 			}
-
-			
 
 			while (!wq.isDone()){
 				wq.processNext();
 			}
 
-			
-	
 			if (wq.bufferIsEmpty()){
-				System.out.println("Buffer kosong sebelum ketemu solusi");
+				System.out.println("Solution cannot be reached from start word.");
+				wq.printVisitedOnly();
 			}
 			else{
 				wq.printSolution();
-				long endTime = System.currentTimeMillis();
-				System.out.println("Time taken:  " + (endTime - startTime) + "ms");
 			}
-	
+			long endTime = System.currentTimeMillis();
+			System.out.println("Time taken:  " + (endTime - startTime) + "ms");
 		}
-
 		in.close();
 	}
 }

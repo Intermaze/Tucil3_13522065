@@ -17,6 +17,7 @@ public class EnglishDict {
 		catch(Exception e){
 			System.out.println("File dictionary tidak ditemukan.");
 			System.out.println(e.getMessage());
+			System.exit(0);
 		}
 	}
 
