@@ -1,27 +1,28 @@
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 public class WordQueue {
-	private ArrayList<Node> graph;
+	private HashMap<String, Node> graph;
 	private PriorityQueue<Node> buffer;
 	private Set<String> visited;
-	private HashSet<String> words;
+	private HashSet<String> dict;
 	private String end;
 
 	public WordQueue(HashSet<String> dict, Comparator<Node> alg, String start, String end){
-		this.graph = new ArrayList<Node>();
+		this.graph = new HashMap<String, Node>();
 		this.buffer = new PriorityQueue<Node>(alg);
 		this.visited = new HashSet<String>();
-		this.words = dict;
+		this.dict = dict;
 		this.end = end;
 		
 		int g,h;
 
-		Iterator<String> wordItr = words.iterator();
+		Iterator<String> wordItr = this.dict.iterator();
 		
 		while (wordItr.hasNext()){
 			String nextWord = wordItr.next();
@@ -29,7 +30,7 @@ public class WordQueue {
 			h = diffLetters(nextWord, end);
 
 			Node node = new Node(nextWord, g, h, null);
-			this.graph.add(node);
+			this.graph.put(node.word, node);
 			
 			if (node.word.equals(start)){
 				this.buffer.add(node);
@@ -42,12 +43,16 @@ public class WordQueue {
 		Node curr = this.buffer.poll();
 		curr.next = findNext(curr.word);
 		for (String w : curr.next){
+			Node n = getNodeInGraph(w);
 			if (!visited.contains(w)){
-				Node n = getNodeInGraph(w);
-				buffer.add(n);
-				visited.add(w);
 				n.copyThread(curr.thread);
 				n.pushThread(curr.word);
+				buffer.add(n);
+				visited.add(w);
+			}
+			else if (curr.thread.size() > n.thread.size()){
+				curr.copyThread(n.thread);
+				curr.pushThread(n.word);
 			}
 		}
 	}
@@ -109,7 +114,7 @@ public class WordQueue {
 		for(int i=0; i<word.length(); i++){
 			for (char aToz : "abcdefghijklmnopqrstuvwxyz".toCharArray()){
 				temp = word.substring(0, i) + aToz + word.substring(i+1);
-				if (this.words.contains(temp) && !temp.equals(word)){
+				if (this.dict.contains(temp) && !temp.equals(word)){
 					next.add(temp);
 				}
 			}
@@ -119,12 +124,7 @@ public class WordQueue {
 
 	// Prekondisi: word pasti ada di dalam graph
 	private Node getNodeInGraph(String word){
-		for (Node node : graph){
-			if (word.equals(node.word)){
-				return node;
-			}
-		}
-		return null;
+		return graph.get(word);
 	}
 
 }
