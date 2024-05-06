@@ -51,12 +51,11 @@ public class Main{
 			System.err.println("End word is not found inside words-alpha.txt");
 		}
 		else{
-			long filterStartTime = System.currentTimeMillis();
+			long startTime = System.currentTimeMillis();
+
 			HashSet<String> filteredDict = filterByLength(dict.getDict(), start.length());
-			long filterEndTime = System.currentTimeMillis();
 			WordQueue wq;
 			
-			long constructorStartTime = System.currentTimeMillis();
 			if (algorithm == 1){
 				wq = new WordQueue(filteredDict, new UCS(), start, end);
 			}
@@ -66,24 +65,22 @@ public class Main{
 			else{
 				wq = new WordQueue(filteredDict, new Astar(), start, end);
 			}
-			long constructorEndTime = System.currentTimeMillis();
 
-			long startTime = System.currentTimeMillis();
+			
 
 			while (!wq.isDone()){
 				wq.processNext();
 			}
 
-			long endTime = System.currentTimeMillis();
+			
 	
 			if (wq.bufferIsEmpty()){
 				System.out.println("Buffer kosong sebelum ketemu solusi");
 			}
 			else{
 				wq.printSolution();
+				long endTime = System.currentTimeMillis();
 				System.out.println("Time taken:  " + (endTime - startTime) + "ms");
-				System.out.println("Filter time taken:  " + (filterEndTime - filterStartTime) + "ms");
-				System.out.println("Constructor time taken:  " + (constructorEndTime - constructorStartTime) + "ms");
 			}
 	
 		}
