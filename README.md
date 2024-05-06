@@ -10,22 +10,22 @@ Pastikan sebelumnya mesin telah terinstall java, dengan mengetik
 ```
 java -version
 ```
-di dalam command prompt untuk mengecek versi java. Sebagai referensi, kode dites menggunakan versi java (JDK) 21. Jika java belum terinstall, ikuti panduan installasi JDK dalam [Installasi java](tps://www.oracle.com/id/java/technologies/downloads/).
+di dalam command prompt untuk mengecek versi java. Sebagai referensi, kode dites menggunakan versi java (JDK) 21. Jika java belum terinstall, ikuti panduan installasi JDK dalam [Installasi java](https://www.oracle.com/id/java/technologies/downloads/).
 
 ## Menjalankan Program
 
-Menggunaakan terminal, Masuk ke dalam folder kode /src dengan perintah
+Menggunaakan terminal, Masuk ke dalam folder kode /src
 ```
 cd src
 ```
-Lalu compile semua java file dengan
+Compile semua java file 
 ```
 javac Main.java
 ```
-jalankan Main.class dengan perintah
+Setelah tercompile, jalankan program dengan perintah
 ```
 java Main
 ```
 
 ## Menggunakan Program
-Masukkan start word dan end word sesuai instruksi program, lalu masukkan algoritma 1,2, atau 3 untuk menggunakan algoritma UCS, GBFS, atau A* secara berturut. Input selain 1,2,3 akan digunakan A* secara automatis. Hasil program akan menampilkan solusi word Solver, jumlah visited word, jumlah steps, dan waktu eksekusi.
+Masukkan start word dan end word sesuai instruksi program, lalu masukkan algoritma 1,2, atau 3 untuk menggunakan algoritma UCS, GBFS, atau A* secara berturut. Input selain 1,2,3 akan digunakan A* secara automatis. Hasil program akan menampilkan solusi word solver, jumlah visited word, jumlah steps, dan waktu eksekusi.
