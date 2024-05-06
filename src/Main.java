@@ -35,7 +35,7 @@ public class Main{
 
 		System.out.println("====== Algorithm List ======");
 		System.out.println("1: UCS (Uniform Cost Search)");
-		System.out.println("2: Greedy Best First Search");
+		System.out.println("2: GBFS (Greedy Best First Search)");
 		System.out.println("3: A* Search");
 		System.out.println("============================");
 		System.out.print("Algorithm to use: ");
@@ -59,13 +59,16 @@ public class Main{
 			
 			if (algorithm == 1){
 				wq = new WordQueue(filteredDict, new UCS(), start, end);
+				System.out.println("Using UCS...");
 			}
 			else if (algorithm == 2){
 				wq = new WordQueue(filteredDict, new GBFS(), start, end);
+				System.out.println("Using GBFS...");
 			}
 			else{
 				//Kalau input selain 1 dan 2, automatis dipilih algoritma A*
 				wq = new WordQueue(filteredDict, new Astar(), start, end);
+				System.out.println("Using A* Search...");
 			}
 
 			while (!wq.isDone()){
