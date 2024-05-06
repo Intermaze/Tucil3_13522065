@@ -15,41 +15,41 @@ public class Main{
 	}	
 
 	public static void main(String[] args) {
-		EnglishDict dict = new EnglishDict("words-alpha.txt");
+		System.out.println("Loading dictionary.txt...");
+
+		EnglishDict dict = new EnglishDict("dictionary.txt");
 		Scanner in = new Scanner(System.in);
 		String start, end;
 		int algorithm;
+
+		System.out.print("\033[H\033[2J");  
+		System.out.flush(); 
 		
 		System.out.println("Welcome to word Ladder! ");
 
 		System.out.print("Start word: ");
 		start = in.nextLine();
 
-		if (start.equals("debug")){
-			start = "head";
-			end = "teal";
-			algorithm = 1;
-		}
-		else{
-			System.out.print("End word: ");
-			end = in.nextLine();
-			System.out.println("====== Algorithm List ======");
-			System.out.println("1: UCS (Uniform Cost Search)");
-			System.out.println("2: Greedy Best First Search");
-			System.out.println("3: A* Search");
-			System.out.println("============================");
-			System.out.print("Algorithm to use: ");
-			algorithm = in.nextInt();
-		}
+		System.out.print("End word: ");
+		end = in.nextLine();
+
+		System.out.println("====== Algorithm List ======");
+		System.out.println("1: UCS (Uniform Cost Search)");
+		System.out.println("2: Greedy Best First Search");
+		System.out.println("3: A* Search");
+		System.out.println("============================");
+		System.out.print("Algorithm to use: ");
+		algorithm = in.nextInt();
+	
 
 		if (start.length() != end.length()){
 			System.err.println("Start word letter count is not equal to end word");
 		}
 		else if (!dict.getDict().contains(start)){
-			System.err.println("Start word is not found inside words-alpha.txt");
+			System.err.println("Start word is not found inside the dictionary");
 		}
 		else if (!dict.getDict().contains(end)){
-			System.err.println("End word is not found inside words-alpha.txt");
+			System.err.println("End word is not found inside the dictionary");
 		}
 		else{
 			long startTime = System.currentTimeMillis();
@@ -91,7 +91,8 @@ abstract class Algorithm implements Comparator<Node>{
 
 	public int compare(Node n1, Node n2){
 		if (fn(n1) > fn(n2)) return 1;
-		else return -1;
+		else if (fn(n1) < fn(n2)) return -1;
+		else return 0;
 	}
 }
 

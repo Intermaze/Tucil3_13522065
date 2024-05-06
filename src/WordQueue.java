@@ -43,17 +43,13 @@ public class WordQueue {
 		Node curr = this.buffer.poll();
 		curr.next = findNext(curr.word);
 		for (String w : curr.next){
-			Node n = getNodeInGraph(w);
 			if (!visited.contains(w)){
+				Node n = getNodeInGraph(w);
 				n.g = curr.g + 1;
 				n.copyThread(curr.thread);
 				n.pushThread(curr.word);
 				buffer.add(n);
 				visited.add(w);
-			}
-			else if (curr.thread.size() > n.thread.size()){
-				curr.copyThread(n.thread);
-				curr.pushThread(n.word);
 			}
 		}
 	}
