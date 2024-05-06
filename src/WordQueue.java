@@ -42,6 +42,7 @@ public class WordQueue {
 	public void processNext(){
 		Node curr = this.buffer.poll();
 		curr.next = findNext(curr.word);
+		visited.add(curr.word);
 		for (String w : curr.next){
 			if (!visited.contains(w)){
 				Node n = getNodeInGraph(w);
