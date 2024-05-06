@@ -92,26 +92,30 @@ public class Main{
 	}
 }
 
-class UCS implements Comparator<Node>{
+abstract class Algorithm implements Comparator<Node>{
+	abstract int fn(Node n);
+
 	public int compare(Node n1, Node n2){
-		if (n1.g > n2.g) return 1;
-		else if (n1.g < n2.g) return -1;
-		else return 0;
+		if (fn(n1) > fn(n2)) return 1;
+		else return -1;
 	}
 }
 
-class GBFS implements Comparator<Node>{
-	public int compare(Node n1, Node n2){
-		if (n1.h > n2.h) return 1;
-		else if (n1.h < n2.h) return -1;
-		else return 0;
+class UCS extends Algorithm{
+	int fn(Node n){
+		return n.g;
 	}
 }
 
-class Astar implements Comparator<Node>{
-	public int compare(Node n1, Node n2){
-		if (n1.g + n1.h > n2.g + n2.h) return 1;
-		else if (n1.g + n1.h < n2.g + n2.h) return -1;
-		else return 0;
+class GBFS extends Algorithm{
+	int fn(Node n){
+		return n.h;
 	}
 }
+
+class Astar extends Algorithm{
+	int fn(Node n){
+		return n.g + n.h;
+	}
+}
+
