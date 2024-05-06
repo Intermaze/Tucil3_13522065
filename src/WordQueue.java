@@ -26,7 +26,7 @@ public class WordQueue {
 		
 		while (wordItr.hasNext()){
 			String nextWord = wordItr.next();
-			g = diffLetters(start, nextWord);
+			g = 0;
 			h = diffLetters(nextWord, end);
 
 			Node node = new Node(nextWord, g, h, null);
@@ -45,6 +45,7 @@ public class WordQueue {
 		for (String w : curr.next){
 			Node n = getNodeInGraph(w);
 			if (!visited.contains(w)){
+				n.g = curr.g + 1;
 				n.copyThread(curr.thread);
 				n.pushThread(curr.word);
 				buffer.add(n);
