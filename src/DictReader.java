@@ -2,10 +2,10 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class EnglishDict {
+public class DictReader {
 	private HashSet<String> dict;
 
-	public EnglishDict(String filename){
+	public DictReader(String filename){
 		try{
 			Scanner s = new Scanner(new File(filename));
 			this.dict = new HashSet<String>();

@@ -17,7 +17,7 @@ public class Main{
 	public static void main(String[] args) {
 		System.out.println("Loading dictionary.txt...");
 
-		EnglishDict dict = new EnglishDict("dictionary.txt");
+		DictReader dict = new DictReader("dictionary.txt");
 		Scanner in = new Scanner(System.in);
 		String start, end;
 		int algorithm;
